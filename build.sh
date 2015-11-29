@@ -15,7 +15,7 @@ make -j 8 'CFLAGS=-DLUAJIT_NUMMODE=2 -DLUAJIT_ENABLE_LUA52COMPAT'
 make install DESTDIR=$(pwd)
 cd ../dpdk
 make -j 8 install T=x86_64-native-linuxapp-gcc
-../../bind-interfaces.sh
+#../../bind-interfaces.sh
 cd ../../build
 cmake ..
 make
