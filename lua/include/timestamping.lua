@@ -100,6 +100,7 @@ local PRTTSYN_STAT_1_RXT0 = 1
 local PRTTSYN_STAT_1_RXT1 = bit.lshift(1, 1)
 local PRTTSYN_STAT_1_RXT2 = bit.lshift(1, 2)
 local PRTTSYN_STAT_1_RXT3 = bit.lshift(1, 3)
+local PRTTSYN_STAT_1_RXT_ALL = 0xf 
 
 local PRTTSYN_STAT_0_TXTIME = bit.lshift(1, 4)
 
@@ -183,7 +184,8 @@ end
 function mod.tryReadRxTimestamp(port, timesync)
 	local id = device.get(port):getPciId()
 	if id == device.PCI_ID_X710 or id == device.PCI_ID_XL710 then
-		if bit.band(dpdkc.read_reg32(port, PRTTSYN_STAT_1), PRTTSYN_STAT_1_RXT0) == 0 then
+		local rtxindex=bit.lshift(1, timesync)
+		if bit.band(dpdkc.read_reg32(port, PRTTSYN_STAT_1), rtxindex) == 0 then
 			return nil
 		end
 		local low = dpdkc.read_reg32(port, PRTTSYN_RXTIME_L[timesync])
@@ -527,6 +529,23 @@ function mod:newUdpTimestamper(txQueue, rxQueue, mem)
 	return self:newTimestamper(txQueue, rxQueue, mem, true)
 end
 
+local function cleanTimestamp(deviceTimeStamp, rxDev, rxQueue)
+	local id = device.get(rxDev.id):getPciId()
+	if id == device.PCI_ID_X710 or id == device.PCI_ID_XL710 then
+       local stats=dpdkc.read_reg32(rxDev.id, PRTTSYN_STAT_1)
+       if bit.band(stats, PRTTSYN_STAT_1_RXT_ALL) then
+            for i=0,3 do
+                rxQueue:getTimestamp(i)
+            end
+       end
+    elseif devTimeStamp then
+        -- clear any "leftover" timestamps
+        if rxDev:hasTimestamp() then
+            self.rxQueue:getTimestamp()
+		end
+	end
+end
+
 --- Try to measure the latency of a single packet.
 --- @param pktSize optional, the size of the generated packet, optional, defaults to the smallest possible size
 --- @param packetModifier optional, a function that is called with the generated packet, e.g. to modified addresses
@@ -557,12 +576,7 @@ function timestamper:measureLatency(pktSize, packetModifier, maxWait, devTimeSta
 		self.txBufs:offloadUdpChecksums()
 	end
 	mod.syncClocks(self.txDev, self.rxDev)
-	if devTimeStamp then
-        -- clear any "leftover" timestamps
-        if self.rxDev:hasTimestamp() then
-            self.rxQueue:getTimestamp()
-		end
-	end
+	cleanTimestamp(devTimeStamp, self.rxDev, self.rxQueue)
 	self.txQueue:send(self.txBufs)
 	local tx = self.txQueue:getTimestamp(500)
 	if tx then
