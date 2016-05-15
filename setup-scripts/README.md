@@ -3,7 +3,7 @@
 1. Install the dependencies (see below)
 2. git submodule update --init
 2. ./build.sh
-3. ./scripts/setup-moongen.sh
+3. cd ./scripts; ./setup-moongen.sh
 4. Run MoonGen from the build directory
 
 Use `deps/dpdk/tools/dpdk_nic_bind.py` to unbind NICs from the DPDK driver.
