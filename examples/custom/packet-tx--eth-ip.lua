@@ -38,18 +38,18 @@ end
 
 function loadSlave1(queue1)
 	local mem = memory.createMemPool(function(buf)
-		buf:getEthernetPacket():fill{
-			pktLength = PKT_SIZE,
-			ethSrc = "10:11:12:13:14:14",
-			ethDst = "10:11:12:13:14:15",
-		}
---		buf:getIPPacket():fill{
---			pktLength = len,
+--		buf:getEthernetPacket():fill{
+--			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
 --			ethDst = "10:11:12:13:14:15",
---			ip4Src = "10.0.0.14",
---			ip4Dst = "10.0.0.15",
 --		}
+		buf:getIPPacket():fill{
+			pktLength = len,
+			ethSrc = "10:11:12:13:14:14",
+			ethDst = "10:11:12:13:14:15",
+			ip4Src = "10.0.0.14",
+			ip4Dst = "10.0.0.15",
+		}
 --		buf:getTcpPacket():fill{
 --			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
@@ -77,18 +77,18 @@ end
 
 function loadSlave2(queue1, queue2)
 	local mem1 = memory.createMemPool(function(buf)
-		buf:getEthernetPacket():fill{
-			pktLength = PKT_SIZE,
-			ethSrc = "10:11:12:13:14:14",
-			ethDst = "10:11:12:13:14:15",
-		}
---		buf:getIPPacket():fill{
---			pktLength = len,
+--		buf:getEthernetPacket():fill{
+--			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
 --			ethDst = "10:11:12:13:14:15",
---			ip4Src = "10.0.0.14",
---			ip4Dst = "10.0.0.15",
 --		}
+		buf:getIPPacket():fill{
+			pktLength = len,
+			ethSrc = "10:11:12:13:14:14",
+			ethDst = "10:11:12:13:14:15",
+			ip4Src = "10.0.0.14",
+			ip4Dst = "10.0.0.15",
+		}
 --		buf:getTcpPacket():fill{
 --			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
@@ -100,18 +100,18 @@ function loadSlave2(queue1, queue2)
 --	  	}
 	end)
 	local mem2 = memory.createMemPool(function(buf)
-		buf:getEthernetPacket():fill{
-			pktLength = PKT_SIZE,
-			ethSrc = "10:11:12:13:14:16",
-			ethDst = "10:11:12:13:14:17",
-		}
---		buf:getIPPacket():fill{
---			pktLength = len,
---			ethSrc = "10:11:12:13:14:14",
---			ethDst = "10:11:12:13:14:15",
---			ip4Src = "10.0.0.14",
---			ip4Dst = "10.0.0.15",
+--		buf:getEthernetPacket():fill{
+--			pktLength = PKT_SIZE,
+--			ethSrc = "10:11:12:13:14:16",
+--			ethDst = "10:11:12:13:14:17",
 --		}
+		buf:getIPPacket():fill{
+			pktLength = len,
+			ethSrc = "10:11:12:13:14:14",
+			ethDst = "10:11:12:13:14:15",
+			ip4Src = "10.0.0.14",
+			ip4Dst = "10.0.0.15",
+		}
 --		buf:getTcpPacket():fill{
 --			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
@@ -147,18 +147,18 @@ end
 
 function loadSlave3(queue1, queue2, queue3)
 	local mem1 = memory.createMemPool(function(buf)
-		buf:getEthernetPacket():fill{
-			pktLength = PKT_SIZE,
-			ethSrc = "10:11:12:13:14:14",
-			ethDst = "10:11:12:13:14:15",
-		}
---		buf:getIPPacket():fill{
---			pktLength = len,
+--		buf:getEthernetPacket():fill{
+--			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
 --			ethDst = "10:11:12:13:14:15",
---			ip4Src = "10.0.0.14",
---			ip4Dst = "10.0.0.15",
 --		}
+		buf:getIPPacket():fill{
+			pktLength = len,
+			ethSrc = "10:11:12:13:14:14",
+			ethDst = "10:11:12:13:14:15",
+			ip4Src = "10.0.0.14",
+			ip4Dst = "10.0.0.15",
+		}
 --		buf:getTcpPacket():fill{
 --			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
@@ -170,18 +170,18 @@ function loadSlave3(queue1, queue2, queue3)
 --	  	}
 	end)
 	local mem2 = memory.createMemPool(function(buf)
-		buf:getEthernetPacket():fill{
-			pktLength = PKT_SIZE,
-			ethSrc = "10:11:12:13:14:16",
-			ethDst = "10:11:12:13:14:17",
-		}
---		buf:getIPPacket():fill{
---			pktLength = len,
---			ethSrc = "10:11:12:13:14:14",
---			ethDst = "10:11:12:13:14:15",
---			ip4Src = "10.0.0.14",
---			ip4Dst = "10.0.0.15",
+--		buf:getEthernetPacket():fill{
+--			pktLength = PKT_SIZE,
+--			ethSrc = "10:11:12:13:14:16",
+--			ethDst = "10:11:12:13:14:17",
 --		}
+		buf:getIPPacket():fill{
+			pktLength = len,
+			ethSrc = "10:11:12:13:14:14",
+			ethDst = "10:11:12:13:14:15",
+			ip4Src = "10.0.0.14",
+			ip4Dst = "10.0.0.15",
+		}
 --		buf:getTcpPacket():fill{
 --			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
@@ -193,18 +193,18 @@ function loadSlave3(queue1, queue2, queue3)
 --	  	}
 	end)
 	local mem3 = memory.createMemPool(function(buf)
-		buf:getEthernetPacket():fill{
-			pktLength = PKT_SIZE,
-			ethSrc = "10:11:12:13:14:18",
-			ethDst = "10:11:12:13:14:19",
-		}
---		buf:getIPPacket():fill{
---			pktLength = len,
---			ethSrc = "10:11:12:13:14:14",
---			ethDst = "10:11:12:13:14:15",
---			ip4Src = "10.0.0.14",
---			ip4Dst = "10.0.0.15",
+--		buf:getEthernetPacket():fill{
+--			pktLength = PKT_SIZE,
+--			ethSrc = "10:11:12:13:14:18",
+--			ethDst = "10:11:12:13:14:19",
 --		}
+		buf:getIPPacket():fill{
+			pktLength = len,
+			ethSrc = "10:11:12:13:14:14",
+			ethDst = "10:11:12:13:14:15",
+			ip4Src = "10.0.0.14",
+			ip4Dst = "10.0.0.15",
+		}
 --		buf:getTcpPacket():fill{
 --			pktLength = PKT_SIZE,
 --			ethSrc = "10:11:12:13:14:14",
